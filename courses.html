@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Пройденные курсы в специалисте</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 </head>
 
 <body>
@@ -55,7 +55,7 @@
                 <td>{{courses.name}}</td>
                 <td>{{courses.passed}}</td>
                 <td >
-                    <button ng-click="removeCourse(this)" class=" btn btn-primary">Удалить</button>
+                    <button ng-click="removeCourse()" class=" myClass btn btn-primary">Удалить</button>
                 </td>
             </tr>
             </tbody>
@@ -64,33 +64,14 @@
     </div>
 </div>
 <script>
-    //Модель
-
-    var model = {
-        myName: "Mikhail Kharitonov",
-        courses: [{name: "HTML/CSS(3 уровня)", passed: "пройден"},
-            {name: "JavaScript(2 уровня)", passed: "пройден"},
-            {name: "HTML5 API (Javascript 3lvl)", passed: "пройден"},
-            {name: "jQuery", passed: "пройден"},
-            {name: "Основы PHP", passed: "пройден"},
-            {name: "Основы SEO", passed: "пройден"},
-            {name: "Wordpress", passed: "пройден"},
-            {name: "M20480 - programming in HTML5 with JavaScript and CSS3", passed: "Пройден"},
-            {name: "AngularJS", passed: "в процессе изучения"},
-            {name: "ReactJS", passed: "планирую в будущем"}
-        ]
-    };
-
     //модуль
     var myCourses = angular.module("myCourses", []);
 
     //контролерр
     myCourses.controller("coursesCTRL", function ($scope, $http) {
-        $scope.model = model;
-        $http.get('https://raw.githubusercontent.com/feanor1993/my_courses/master/model.json').success(function(data){
-            console.log(data);
+        $http.get('model.json').success(function (data) {
+            $scope.model = data;
         });
-
         //добавляем обработчик события по клику на кнопку
         $scope.addNewCourse = function () {
             //пушим в курсы новые проперти
@@ -102,14 +83,11 @@
             //чистим инпут
             $scope.courseName = "";
         };
-
         $scope.removeCourse = function (item) {
-
 
         }
 
     })
 </script>
-r;
 </body>
 </html>
