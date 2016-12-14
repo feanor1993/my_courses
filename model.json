@@ -1,0 +1,45 @@
+{
+  "myName": "Mikhail Kharitonov",
+  "courses": [
+    {
+      "name": "HTML/CSS(3 уровня)",
+      "passed": "пройден"
+    },
+    {
+      "name": "JavaScript(2 уровня)",
+      "passed": "пройден"
+    },
+    {
+      "name": "HTML5 API (Javascript 3lvl)",
+      "passed": "пройден"
+    },
+    {
+      "name": "jQuery",
+      "passed": "пройден"
+    },
+    {
+      "name": "Основы PHP",
+      "passed": "пройден"
+    },
+    {
+      "name": "Основы SEO",
+      "passed": "пройден"
+    },
+    {
+      "name": "Wordpress",
+      "passed": "пройден"
+    },
+    {
+      "name": "M20480 - programming in HTML5 with JavaScript and CSS3",
+      "passed": "Пройден"
+    },
+    {
+      "name": "AngularJS",
+      "passed": "в процессе изучения"
+    },
+    {
+      "name": "ReactJS",
+      "passed": "планирую в будущем"
+    }
+  ]
+}

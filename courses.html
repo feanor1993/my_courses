@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru" ng-app="myCourses">
+<head>
+    <meta charset="UTF-8">
+    <title>Пройденные курсы в специалисте</title>
+    <style>
+        .filter{
+            width: 400px;
+            margin-bottom: 20px;
+            border-radius: 3px;
+            height: 50px;
+        }
+    </style>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script src="bower_components/angular/angular.min.js"></script>
+</head>
+
+<body >
+<div class="container" ng-controller="coursesCTRL">
+    <div class="page-header">
+
+            <h1> Пройденные курсы</h1>
+            <h3>
+                Student {{model.myName}}. Quantity of courses {{model.courses.length}}.
+            </h3>
+
+    </div>
+    <div class="panel">
+        <!--с помощью ng-model query будет  связываем данные с будущим фильтром, который  будет-->
+        <!--фильтрует значения в tr по введенным в input данным.-->
+        <!--Далее необходимо будет прописать, какие именно данные будут фильтроваться( в нашем случае строки таблицы)-->
+        <input type="text"  ng-model="query" placeholder="фильтр" class="filter">
+
+        <div class="input-group">
+            <form action="#" method="post">
+
+
+                <div class="input-group">
+
+                </div>
+                <!--Добавляем в input директиву ng-model cо значением coursename, чтобы все введенные в input данные писались в coursname -->
+                <input type="text" class="form-control" ng-model="courseName" placeholder="Имя курса" ></form>
+                <span class="input-group-btn">
+                <!--с помощью директивы ng-click  добавляем обработчик события click-->
+                <button class="btn btn-default" ng-click="addNewCourse()">Добавить</button>
+            </span>
+        </div>
+
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th><a href="#">Курс</a></th>
+                <th><a href="#">Пройден</a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--директива ng-repeat повторояет html элемент, к которому она привязана, столько раз, сколько элементов(courses)-->
+             <!--в коллекции (model.courses). Напоминает each в jQuery -->
+
+            <!--Строки таблицы фильтруются по запросу query-->
+            <tr ng-repeat="courses in model.courses | filter: query" >
+                <td>{{courses.name}}</td>
+                <td>{{courses.passed}}</td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<script>
+    //Модель
+
+    var model = {
+        myName: "Mikhail Kharitonov",
+        courses: [{name: "HTML/CSS(3 уровня)", passed: "пройден"},
+            {name: "JavaScript(2 уровня)", passed: "пройден"},
+            {name: "HTML5 API (Javascript 3lvl)", passed: "пройден"},
+            {name: "jQuery", passed: "пройден"},
+            {name: "Основы PHP", passed: "пройден"},
+            {name: "Основы SEO", passed: "пройден"},
+            {name: "Wordpress", passed: "пройден"},
+            {name: "M20480 - programming in HTML5 with JavaScript and CSS3", passed: "Пройден"},
+            {name: "AngularJS", passed: "в процессе изучения"},
+            {name: "ReactJS", passed: "планирую в будущем"}
+        ]
+    };
+
+    //модуль
+    var myCourses = angular.module("myCourses",[]);
+
+    //контролерр
+    myCourses.controller("coursesCTRL", function($scope, $http){
+        $scope.model = model;
+//        $http.get('model.json').success(function(data){
+//            console.log(data);
+//        });
+
+
+    //добавляем обработчик события по клику на кнопку
+        $scope.addNewCourse =function(){
+            //пушим в курсы новые проперти
+            $scope.model.courses.push({
+                //помните courseName в инпуте?
+                name: $scope.courseName,
+                passed: "Планирую в будущем"
+            });
+            //чистим инпут
+            $scope.courseName = "";
+        };
+
+        $scope.Cname = "myName";
+
+    })
+</script>
+</body>
+</html>
