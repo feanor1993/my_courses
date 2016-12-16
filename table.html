@@ -1,0 +1,29 @@
+<table class="table table-hover" id="myTable">
+    <thead>
+    <tr>
+        <th>№</th>
+        <th><a href="#">Курс</a></th>
+        <th><a href="#">Пройден</a></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <!--директива ng-repeat повторояет html элемент, к которому она привязана, столько раз, сколько элементов(courses)-->
+    <!--в коллекции (model.courses). Напоминает each в jQuery -->
+
+    <!--Строки таблицы фильтруются по запросу query-->
+    <!--С помощью директивы ng-class и встроенных переменных even(четный) и odd(нечетный) можно динамиечески задать классы-->
+    <tr ng-repeat="courses in model.courses | filter: query" ng-class="$even ? 'class-one' : 'class-two'" ng-cloak>
+        <!--$index - порядковый номер текущей итерации-->
+        <td ng-cloak>{{$index +1}}</td>
+        <td ng-cloak>{{courses.name}}</td>
+        <td ng-cloak>{{courses.passed}}</td>
+        <td  ng-cloak>
+            <button ng-click="removeCourse()" class=" myClass btn btn-primary">Удалить</button>
+        </td>
+    </tr>
+    </tbody>
+    <!--С помощью директивы ng-cloak элементы, которые динамически формируются с помощью angularjs -->
+    <!--не будут видны пользователю до полного выполнения скриптов(пользователь не увидит {{}} )-->
+
+</table>

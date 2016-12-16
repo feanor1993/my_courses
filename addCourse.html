@@ -1,0 +1,11 @@
+<form action="#" method="get" class="form-inline">
+    <!--Добавляем в input директиву ng-model cо значением coursename, чтобы все введенные в input данные писались в coursname -->
+    <div class="form-group">
+        <label> Добавить новый курс</label>
+        <input type="text" class="form-control" ng-model="courseName" placeholder="Имя курса">
+    </div>
+
+    <!--с помощью директивы ng-click  добавляем обработчик события click-->
+    <button class="btn btn-primary" ng-click="addNewCourse()">Добавить</button>
+
+</form>
