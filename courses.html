@@ -5,6 +5,16 @@
     <title>Пройденные курсы в специалисте</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+        .class-one {
+            background: #fff;
+        }
+
+        .class-two {
+            background: lightgrey;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,69 +35,14 @@
         <label> Найти курс</label>
         <input type="text" ng-model="query" placeholder="фильтр" class="input-sm">
         <hr>
-
-
-        <form action="#" method="get" class="form-inline">
-            <!--Добавляем в input директиву ng-model cо значением coursename, чтобы все введенные в input данные писались в coursname -->
-            <div class="form-group">
-                <label> Добавить новый курс</label>
-                <input type="text" class="form-control" ng-model="courseName" placeholder="Имя курса">
-            </div>
-
-            <!--с помощью директивы ng-click  добавляем обработчик события click-->
-            <button class="btn btn-primary" ng-click="addNewCourse()">Добавить</button>
-
-        </form>
-        <table class="table table-hover" id="myTable">
-            <thead>
-            <tr>
-                <th><a href="#">Курс</a></th>
-                <th><a href="#">Пройден</a></th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <!--директива ng-repeat повторояет html элемент, к которому она привязана, столько раз, сколько элементов(courses)-->
-            <!--в коллекции (model.courses). Напоминает each в jQuery -->
-
-            <!--Строки таблицы фильтруются по запросу query-->
-            <tr ng-repeat="courses in model.courses | filter: query">
-                <td>{{courses.name}}</td>
-                <td>{{courses.passed}}</td>
-                <td >
-                    <button ng-click="removeCourse()" class=" myClass btn btn-primary">Удалить</button>
-                </td>
-            </tr>
-            </tbody>
-
-        </table>
+        <ng-include src="formURL"></ng-include>
+        <!--C помощью директивы ng-include мы можем вставлять в таблицу повторяющиеся куски кода(шапка, подвал, etc.) -->
+        <!--Атрибут  src формируется в scope-->
+        <ng-include src="tableURl"></ng-include>
     </div>
 </div>
 <script>
-    //модуль
-    var myCourses = angular.module("myCourses", []);
 
-    //контролерр
-    myCourses.controller("coursesCTRL", function ($scope, $http) {
-        $http.get('model.json').success(function (data) {
-            $scope.model = data;
-        });
-        //добавляем обработчик события по клику на кнопку
-        $scope.addNewCourse = function () {
-            //пушим в курсы новые проперти
-            $scope.model.courses.push({
-                //помните courseName в инпуте?
-                name: $scope.courseName,
-                passed: "Планирую в будущем"
-            });
-            //чистим инпут
-            $scope.courseName = "";
-        };
-        $scope.removeCourse = function (item) {
-
-        }
-
-    })
 </script>
 </body>
 </html>
